@@ -10,11 +10,39 @@ import { Component } from 'react'
 
 interface ClassComponentProps {
   title: string
+  subTitle?: string
 }
 
-class ClassComponent extends Component<ClassComponentProps> {
+interface ClassComponentState {
+  counter: number
+}
+
+class ClassComponent extends Component<
+  ClassComponentProps,
+  ClassComponentState
+> {
+  state = {
+    counter: 0,
+  }
+
   render() {
-    return <h2>{this.props.title}</h2>
+    return (
+      <div>
+        <h2>{this.props.title}</h2>
+        <h4>{this.props.subTitle?.toUpperCase()}</h4>
+        <button
+          onClick={() => this.setState({ counter: this.state.counter + 1 })}
+        >
+          +
+        </button>
+        <p>{this.state.counter}</p>
+        <button
+          onClick={() => this.setState({ counter: this.state.counter - 1 })}
+        >
+          -
+        </button>
+      </div>
+    )
   }
 }
 
